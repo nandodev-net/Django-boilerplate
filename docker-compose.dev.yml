@@ -8,12 +8,14 @@ services:
     command: python /code/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
-    ports:
-      - 8000:8000
+      - static_files:/code/static
+    expose:
+      - 8000
     env_file:
       - ./.dev.env
     depends_on:
       - db
+
   db:
     image: timescale/timescaledb-ha:pg14-latest
     volumes:
@@ -22,5 +24,17 @@ services:
       - ./.dev.db.env
     hostname: postgres
 
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - static_files:/code/static
+    ports:
+      - 80:80
+    depends_on:
+      - web
+    hostname: nginx   
+
 volumes:
   postgres_data:
+  static_files:
