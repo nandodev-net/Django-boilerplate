@@ -26,8 +26,9 @@ class StoreModel(StoreBaseModel):
     STORE_CODE_PREFIX = ''
 
     store_code = models.CharField(
-        max_length=50,
-        verbose_name=_('Store Code'),
+        primary_key=True,
+        max_length=25,
+        verbose_name=('Store Code'),
         unique=True,
         blank=False,
         null=False
