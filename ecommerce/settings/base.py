@@ -44,6 +44,8 @@ THIRD_PARTY_APPS = [
 PROJECT_APPS = [
     'apps.core.company.apps.CompanyConfig',
     'apps.core.store.apps.StoreConfig',
+    'apps.core.users.apps.UsersConfig',
+
 ]
     
 API_APPS = []
@@ -61,6 +63,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'ecommerce.urls'
+AUTH_USER_MODEL = 'users.CustomUser'
 
 TEMPLATES = [
     {
